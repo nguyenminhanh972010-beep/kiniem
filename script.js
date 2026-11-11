@@ -1,3 +1,4 @@
+javascript
 // 1. Hiển thị ngày tháng hiện tại lên Banner
 const dateBox = document.getElementById('currentDate');
 const now = new Date();
@@ -38,7 +39,8 @@ submitPostBtn.addEventListener('click', () => {
     return;
   }
 
-  const file = fileInput.files;
+  // ĐÃ SỬA TẠI ĐÂY: Thêm [0] để lấy chính xác file ảnh/video
+  const file = fileInput.files[0]; 
   const caption = captionInput.value.trim();
   const fileURL = URL.createObjectURL(file);
   const isVideo = file.type.startsWith('video/');
@@ -103,8 +105,8 @@ customColorPicker.addEventListener('input', (e) => {
 });
 
 bgImageInput.addEventListener('change', (e) => {
-  if (e.target.files && e.target.files) {
-    const fileURL = URL.createObjectURL(e.target.files);
+  if (e.target.files && e.target.files[0]) {
+    const fileURL = URL.createObjectURL(e.target.files[0]);
     document.body.style.backgroundImage = `url('${fileURL}')`;
   }
 });
