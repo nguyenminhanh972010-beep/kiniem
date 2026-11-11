@@ -4,131 +4,107 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cổng Thông Tin Kỷ Niệm</title>
-  <link rel="stylesheet" href="https://cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
-    body { background-color: #f0f2f5; color: #333; transition: background 0.3s; background-size: cover; background-position: center; background-attachment: fixed; }
+    body { background-color: #f0f2f5; color: #333; background-size: cover; background-position: center; background-attachment: fixed; transition: background 0.3s; }
+
+    /* Header & Banner */
     .header-container { max-width: 1200px; margin: 0 auto; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .banner { background: linear-gradient(135deg, #0056b3, #003366); color: white; padding: 20px; display: flex; align-items: center; justify-content: space-between; }
+    .banner {
+      background: linear-gradient(135deg, #0056b3, #003366);
+      color: white;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
     .banner h1 { font-size: 24px; text-transform: uppercase; }
     .banner p { font-size: 14px; opacity: 0.9; }
-    .navbar { background: #004080; display: flex; list-style: none; padding: 0 20px; overflow-x: auto; }
-    .navbar li a { color: white; text-decoration: none; padding: 12px 18px; display: block; font-size: 14px; font-weight: bold; transition: background 0.2s; }
+
+    /* Menu ngang */
+    .navbar {
+      background: #004080;
+      display: flex;
+      list-style: none;
+      padding: 0 20px;
+      overflow-x: auto;
+    }
+    .navbar li a {
+      color: white;
+      text-decoration: none;
+      padding: 12px 18px;
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
     .navbar li a:hover { background: #0056b3; }
-    .main-layout { max-width: 1200px; margin: 20px auto; display: grid; grid-template-columns: 280px 1fr 300px; gap: 20px; padding: 0 10px; }
-    @media (max-width: 900px) { .main-layout { grid-template-columns: 1fr; } }
-    .box { background: white; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px; overflow: hidden; }
-    .box-header { background: #004080; color: white; padding: 10px 15px; font-size: 14px; font-weight: bold; text-transform: uppercase; }
+
+    /* Layout chính chia cột */
+    .main-layout {
+      max-width: 1200px;
+      margin: 20px auto;
+      display: grid;
+      grid-template-columns: 280px 1fr 300px;
+      gap: 20px;
+      padding: 0 10px;
+    }
+
+    @media (max-width: 900px) {
+      .main-layout { grid-template-columns: 1fr; }
+    }
+
+    /* Các hộp khối (Box) */
+    .box {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .box-header {
+      background: #004080;
+      color: white;
+      padding: 10px 15px;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
     .box-content { padding: 15px; }
-    .upload-trigger-btn { width: 100%; background: #28a745; color: white; border: none; padding: 12px; font-size: 15px; font-weight: bold; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; }
+
+    /* Nút đăng tải */
+    .upload-trigger-btn {
+      width: 100%;
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
     .upload-trigger-btn:hover { background: #218838; }
+
+    /* Dòng thời gian hiển thị bài viết */
     .feed-container { display: flex; flex-direction: column; gap: 15px; }
-    .media-card { background: white; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-    .media-card img, .media-card video { width: 100%; max-height: 450px; object-fit: contain; background: #111; display: block; }
-    .media-body { padding: 15px; }
-    .media-caption { font-size: 14px; color: #333; margin-bottom: 12px; white-space: pre-line; line-height: 1.5; }
-    .media-footer { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #777; border-top: 1px solid #eee; padding-top: 8px; }
-    .delete-btn { background: none; border: none; color: #dc3545; cursor: pointer; font-size: 13px; font-weight: bold; }
-    .delete-btn:hover { text-decoration: underline; }
-    .bg-setting { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
-    .bg-setting select, .bg-setting input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
-    .modal-overlay.active { opacity: 1; pointer-events: auto; }
-    .modal-box { background: white; width: 95%; max-width: 450px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-    .modal-title { background: #004080; color: white; padding: 12px 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
-    .modal-close-btn { background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
-    .modal-body { padding: 15px; }
-    .form-group { margin-bottom: 15px; }
-    .form-group label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 6px; }
-    .form-group textarea { width: 100%; height: 90px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; resize: vertical; font-size: 14px; }
-    .form-group input[type="file"] { width: 100%; padding: 5px 0; }
-    .modal-footer { padding: 12px 15px; background: #f8f9fa; display: flex; justify-content: flex-end; gap: 8px; border-top: 1px solid #eee; }
-    .btn { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 13px; }
-    .btn-primary { background: #28a745; color: white; }
-    .btn-primary:hover { background: #218838; }
-    .btn-secondary { background: #6c757d; color: white; }
-    .btn-secondary:hover { background: #5a6268; }
-  </style>
-</head>
-<body>
-
-  <div class="header-container">
-    <div class="banner">
-      <div>
-        <h1>Cổng Thông Tin Kỷ Niệm</h1>
-        <p>Không gian lưu giữ hình ảnh và video cá nhân</p>
-      </div>
-      <div id="currentDate" style="font-size: 13px; font-weight: bold; background: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 4px;"></div>
-    </div>
-    <ul class="navbar">
-      <li><a href="#"><i class="fa-solid fa-house"></i> Trang Chủ</a></li>
-      <li><a href="#"><i class="fa-solid fa-images"></i> Bộ Sưu Tập</a></li>
-      <li><a href="#"><i class="fa-solid fa-video"></i> Video</a></li>
-      <li><a href="#"><i class="fa-solid fa-circle-info"></i> Giới Thiệu</a></li>
-    </ul>
-  </div>
-
-  <div class="main-layout">
-    <div>
-      <div class="box">
-        <div class="box-header">Đăng Kỷ Niệm</div>
-        <div class="box-content">
-          <button id="openModalBtn" class="upload-trigger-btn"><i class="fa-solid fa-circle-plus" style="font-size: 18px;"></i> Tải Ảnh / Video Mới</button>
-        </div>
-      </div>
-      <div class="box">
-        <div class="box-header">Thống Kê Nhanh</div>
-        <div class="box-content" style="font-size: 13px; line-height: 1.6;">
-          <p><i class="fa-solid fa-file-image"></i> Tổng số bài đăng: <span id="postCount" style="font-weight: bold; color: #004080;">0</span></p>
-          <p><i class="fa-solid fa-eye"></i> Trạng thái: Hoạt động tốt</p>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="box">
-        <div class="box-header"><i class="fa-solid fa-newspaper"></i> Dòng Thời Gian & Kỷ Niệm</div>
-        <div class="box-content">
-          <div id="feedContainer" class="feed-container"></div>
-          <div id="emptyMsg" style="text-align: center; color: #777; padding: 30px 0; font-size: 14px;">Chưa có bài đăng nào. Hãy nhấn nút <strong>Tải Ảnh / Video Mới</strong> ở cột trái để bắt đầu!</div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="box">
-        <div class="box-header">Tùy Chỉnh Giao Diện</div>
-        <div class="box-content bg-setting">
-          <label>Chọn kiểu nền web:</label>
-          <select id="bgTypeSelect">
-            <option value="default">Mặc định (Xám nhạt)</option>
-            <option value="color">Màu nền tùy chọn</option>
-            <option value="image">Ảnh nền từ máy</option>
-          </select>
-          <input type="color" id="customColorPicker" value="#f0f2f5" style="display: none; width: 100%; height: 35px; cursor: pointer;">
-          <input type="file" id="bgImageInput" accept="image/*" style="display: none;">
-        </div>
-      </div>
-      <div class="box">
-        <div class="box-header">Tin Nổi Bật</div>
-        <div class="box-content" style="font-size: 13px; color: #555; line-height: 1.5;">
-          <p>✨ Chào mừng bạn đến với không gian lưu trữ cá nhân mô phỏng cổng thông tin điện tử.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="uploadModal" class="modal-overlay">
-    <div class="modal-box">
-      <div class="modal-title"><span>Tải Lên Kỷ Niệm Mới</span><button id="closeModalBtn" class="modal-close-btn">&times;</button></div>
-      <div class="modal-body">
-        <div class="form-group"><label>Chọn Tệp (Hình ảnh hoặc Video):</label><input type="file" id="mediaFileInput" accept="image/*,video/*"></div>
-        <div class="form-group"><label>Lời tựa / Mô tả kỷ niệm:</label><textarea id="mediaCaptionInput" placeholder="Nhập cảm nghĩ hoặc kỷ niệm của bạn..."></textarea></div>
-      </div>
-      <div class="modal-footer"><button id="cancelBtn" class="btn btn-secondary">Hủy</button><button id="submitPostBtn" class="btn btn-primary">Đăng lên</button></div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+    .media-card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .media-card img, .media-card video {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      background: #000;
+      display: block;
+    }
+    .media-body { padding: 12px
