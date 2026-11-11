@@ -3,75 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cổng Thông Tin Kỷ Niệm</title>
+  <title>Cổng Thông Tin Kỷ Niệm Cá Nhân</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
     body { background-color: #f0f2f5; color: #333; background-size: cover; background-position: center; background-attachment: fixed; transition: background 0.3s; }
 
     /* Header & Banner */
-    .header-container { max-width: 1200px; margin: 0 auto; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .header-container { max-width: 1200px; margin: 10px auto 0; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     .banner {
-      background: linear-gradient(135deg, #0056b3, #003366);
+      background: linear-gradient(135deg, #004080, #002244);
       color: white;
-      padding: 20px;
+      padding: 25px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .banner h1 { font-size: 24px; text-transform: uppercase; }
-    .banner p { font-size: 14px; opacity: 0.9; }
+    .banner h1 { font-size: 26px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .banner p { font-size: 14px; opacity: 0.9; margin-top: 5px; }
 
     /* Menu ngang */
     .navbar {
-      background: #004080;
+      background: #003366;
       display: flex;
       list-style: none;
-      padding: 0 20px;
+      padding: 0 10px;
       overflow-x: auto;
+      border-bottom: 3px solid #0056b3;
     }
     .navbar li a {
       color: white;
       text-decoration: none;
       padding: 12px 18px;
       display: block;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: bold;
+      text-transform: uppercase;
       transition: background 0.2s;
     }
-    .navbar li a:hover { background: #0056b3; }
+    .navbar li a:hover, .navbar li a.active { background: #0056b3; }
 
-    /* Layout chính chia cột */
+    /* Bố cục chia 3 cột */
     .main-layout {
       max-width: 1200px;
-      margin: 20px auto;
+      margin: 15px auto;
       display: grid;
-      grid-template-columns: 280px 1fr 300px;
-      gap: 20px;
+      grid-template-columns: 260px 1fr 280px;
+      gap: 15px;
       padding: 0 10px;
     }
-
-    @media (max-width: 900px) {
+    @media (max-width: 950px) {
       .main-layout { grid-template-columns: 1fr; }
     }
 
-    /* Các hộp khối (Box) */
+    /* Khung Box */
     .box {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 4px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       overflow: hidden;
+      border: 1px solid #dcdcdc;
     }
     .box-header {
       background: #004080;
       color: white;
-      padding: 10px 15px;
-      font-size: 14px;
+      padding: 10px 12px;
+      font-size: 13px;
       font-weight: bold;
       text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .box-content { padding: 15px; }
+    .box-content { padding: 12px; }
 
     /* Nút đăng tải */
     .upload-trigger-btn {
@@ -79,8 +84,8 @@
       background: #28a745;
       color: white;
       border: none;
-      padding: 12px;
-      font-size: 15px;
+      padding: 10px;
+      font-size: 14px;
       font-weight: bold;
       border-radius: 4px;
       cursor: pointer;
@@ -92,5 +97,511 @@
     }
     .upload-trigger-btn:hover { background: #218838; }
 
-    /* Dòng thời gian hiển thị bài viết */
-    .
+    /* Bài đăng */
+    .feed-container { display: flex; flex-direction: column; gap: 15px; }
+    .media-card {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .media-card img, .media-card video {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      background: #000;
+      display: block;
+    }
+    .media-body { padding: 12px; }
+    .media-caption { font-size: 14px; color: #333; margin-bottom: 8px; white-space: pre-line; line-height: 1.4; }
+    .media-footer { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #666; border-top: 1px solid #eee; padding-top: 8px; }
+    
+    /* Mặc định ẩn nút xóa bài đối với người dùng thường */
+    .delete-btn { 
+      display: none; 
+      background: none; 
+      border: none; 
+      color: #dc3545; 
+      cursor: pointer; 
+      font-size: 12px; 
+      font-weight: bold; 
+    }
+    .delete-btn:hover { text-decoration: underline; }
+
+    /* Bật hiển thị nút xóa khi kích hoạt chế độ admin */
+    body.admin-mode .delete-btn { display: inline-block !important; }
+
+    /* Menu bên */
+    .sidebar-menu { list-style: none; }
+    .sidebar-menu li { border-bottom: 1px dashed #eee; }
+    .sidebar-menu li a {
+      display: block;
+      padding: 8px 10px;
+      color: #004080;
+      text-decoration: none;
+      font-size: 13px;
+      transition: background 0.2s, padding-left 0.2s;
+    }
+    .sidebar-menu li a:hover { background: #f8f9fa; padding-left: 14px; color: #002244; font-weight: bold; }
+
+    .bg-setting { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+    .bg-setting select, .bg-setting input { padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; }
+
+    /* Modal Popup */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;
+      z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-box {
+      background: white; width: 90%; max-width: 450px; border-radius: 6px; overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    .modal-title { background: #004080; color: white; padding: 12px 15px; font-size: 14px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+    .modal-body { padding: 15px; }
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #333; }
+    .form-group textarea { width: 100%; height: 85px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; resize: vertical; font-size: 13px; }
+    .modal-footer { padding: 10px 15px; background: #f8f9fa; display: flex; justify-content: flex-end; gap: 8px; }
+    .btn { padding: 8px 14px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 13px; }
+    .btn-primary { background: #004080; color: white; }
+    .btn-secondary { background: #6c757d; color: white; }
+
+    .page-section { display: none; }
+    .page-section.active-section { display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- Header & Banner -->
+  <div class="header-container">
+    <div class="banner">
+      <div>
+        <h1>Cổng Thông Tin Kỷ Niệm Cá Nhân</h1>
+        <p>Không gian lưu giữ hình ảnh, video và khoảnh khắc đáng nhớ</p>
+      </div>
+      <div id="currentDate" style="font-size: 13px; text-align: right; background: rgba(0,0,0,0.2); padding: 6px 10px; border-radius: 4px;"></div>
+    </div>
+    
+    <!-- Thanh Menu -->
+    <ul class="navbar">
+      <li><a href="#" onclick="switchTab('home', event)" class="active" id="nav-home"><i class="fa-solid fa-house"></i> Trang Chủ</a></li>
+      <li><a href="#" onclick="switchTab('gallery', event)" id="nav-gallery"><i class="fa-solid fa-images"></i> Bộ Sưu Tập Ảnh</a></li>
+      <li><a href="#" onclick="switchTab('videos', event)" id="nav-videos"><i class="fa-solid fa-video"></i> Thư Viện Video</a></li>
+      <li><a href="#" onclick="switchTab('about', event)" id="nav-about"><i class="fa-solid fa-circle-info"></i> Giới Thiệu</a></li>
+      <li style="margin-left: auto;">
+        <a href="#" onclick="toggleAdminMode(event)" id="adminLockBtn" style="background: #002244; color: #ffc107;" title="Chế độ người quản lý">
+          <i class="fa-solid fa-lock" id="adminIcon"></i> <span id="adminText">Chế Độ Xem</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Bố cục 3 cột -->
+  <div class="main-layout">
+    
+    <!-- CỘT TRÁI -->
+    <div>
+      <div class="box">
+        <div class="box-header"><i class="fa-solid fa-pen-to-square"></i> Đăng Kỷ Niệm</div>
+        <div class="box-content">
+          <button id="openModalBtn" class="upload-trigger-btn">
+            <i class="fa-solid fa-circle-plus" style="font-size: 16px;"></i> Tải Ảnh / Video Mới
+          </button>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="box-header"><i class="fa-solid fa-bars"></i> Danh Mục Nhanh</div>
+        <div class="box-content" style="padding: 0;">
+          <ul class="sidebar-menu">
+            <li><a href="#" onclick="switchTab('home', event)"><i class="fa-solid fa-angle-right"></i> Dòng thời gian chung</a></li>
+            <li><a href="#" onclick="switchTab('gallery', event)"><i class="fa-solid fa-angle-right"></i> Xem tất cả hình ảnh</a></li>
+            <li><a href="#" onclick="switchTab('videos', event)"><i class="fa-solid fa-angle-right"></i> Xem tất cả video</a></li>
+            <li><a href="#" onclick="switchTab('about', event)"><i class="fa-solid fa-angle-right"></i> Thông tin chủ nhân web</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="box-header"><i class="fa-solid fa-chart-pie"></i> Thống Kê</div>
+        <div class="box-content" style="font-size: 13px; line-height: 1.6;">
+          <p><i class="fa-solid fa-file-image"></i> Tổng bài đăng: <span id="postCount">0</span></p>
+          <p><i class="fa-solid fa-eye"></i> Trạng thái: Hoạt động tốt</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CỘT GIỮA -->
+    <div>
+      <div id="section-home" class="page-section active-section">
+        <div class="box">
+          <div class="box-header"><i class="fa-solid fa-newspaper"></i> Dòng Thời Gian & Kỷ Niệm Mới Nhất</div>
+          <div class="box-content">
+            <div id="feedContainer" class="feed-container"></div>
+            <div id="emptyMsg" style="text-align: center; color: #777; padding: 40px 0; font-size: 14px;">
+              Chưa có bài đăng nào. Hãy nhấn nút <strong>Tải Ảnh / Video Mới</strong> ở cột trái để bắt đầu!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="section-gallery" class="page-section">
+        <div class="box">
+          <div class="box-header"><i class="fa-solid fa-images"></i> Bộ Sưu Tập Hình Ảnh</div>
+          <div class="box-content">
+            <div id="galleryContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px;"></div>
+            <p id="emptyGallery" style="text-align: center; color: #777; padding: 30px 0; font-size: 13px;">Chưa có hình ảnh nào trong bộ sưu tập.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="section-videos" class="page-section">
+        <div class="box">
+          <div class="box-header"><i class="fa-solid fa-video"></i> Thư Viện Video</div>
+          <div class="box-content">
+            <div id="videoContainer" class="feed-container"></div>
+            <p id="emptyVideo" style="text-align: center; color: #777; padding: 30px 0; font-size: 13px;">Chưa có video nào được đăng tải.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="section-about" class="page-section">
+        <div class="box">
+          <div class="box-header"><i class="fa-solid fa-circle-info"></i> Giới Thiệu Về Trang Web</div>
+          <div class="box-content" style="font-size: 13px; line-height: 1.6; color: #444;">
+            <p style="margin-bottom: 10px;">✨ Trang web này được xây dựng mô phỏng theo mô hình cổng thông tin điện tử hiện đại, giúp lưu giữ các khoảnh khắc, hình ảnh và video cá nhân một cách ngăn nắp và an toàn.</p>
+            <p>💡 Toàn bộ dữ liệu được lưu trữ trực tiếp bằng IndexedDB giúp trang web tải cực nhanh và lưu trữ vĩnh viễn.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CỘT PHẢI -->
+    <div>
+      <div class="box">
+        <div class="box-header"><i class="fa-solid fa-palette"></i> Tùy Chỉnh Giao Diện</div>
+        <div class="box-content bg-setting">
+          <label>Chọn kiểu nền web:</label>
+          <select id="bgTypeSelect">
+            <option value="default">Mặc định (Xám nhạt)</option>
+            <option value="color">Màu nền tùy chọn</option>
+            <option value="image">Ảnh nền từ máy</option>
+          </select>
+          <input type="color" id="customColorPicker" value="#f0f2f5" style="display: none; width: 100%; height: 35px; cursor: pointer; margin-top: 5px;">
+          <input type="file" id="bgImageInput" accept="image/*" style="display: none;">
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="box-header"><i class="fa-solid fa-bullhorn"></i> Tin Nổi Bật</div>
+        <div class="box-content" style="font-size: 13px; color: #555; line-height: 1.5;">
+          <p>🌟 Chào mừng bạn ghé thăm không gian lưu trữ kỷ niệm trực tuyến!</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Popup Modal -->
+  <div id="uploadModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-title">
+        <span>Thêm Ảnh Hoặc Video Mới</span>
+        <button id="closeModalBtn" style="background:none; border:none; color:white; font-size:16px; cursor:pointer;">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Chọn tệp tin (Ảnh hoặc Video):</label>
+          <input type="file" id="mediaFileInput" accept="image/*,video/*" style="font-size: 13px;">
+        </div>
+        <div class="form-group">
+          <label>Lời nhắn / Chú thích dưới tệp:</label>
+          <textarea id="mediaCaptionInput" placeholder="Nhập lời nhắn gửi gắm của bạn..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancelBtn" class="btn btn-secondary">Hủy</button>
+        <button type="button" id="submitPostBtn" class="btn btn-primary">Đăng Tải</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript hoàn chỉnh với IndexedDB & Quyền Quản Lý -->
+  <script>
+    // 1. Ngày tháng hiện tại
+    const dateBox = document.getElementById('currentDate');
+    const now = new Date();
+    const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+    dateBox.innerText = `${days[now.getDay()]} - Ngày ${now.getDate()} Tháng ${now.getMonth() + 1} Năm ${now.getFullYear()}`;
+
+    // 2. Chuyển Tab Menu
+    function switchTab(tabId, event) {
+      if (event) event.preventDefault();
+      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active-section'));
+      document.querySelectorAll('.navbar a').forEach(a => {
+        if(a.id !== 'adminLockBtn') a.classList.remove('active');
+      });
+      
+      document.getElementById('section-' + tabId).classList.add('active-section');
+      const activeNav = document.getElementById('nav-' + tabId);
+      if (activeNav) activeNav.classList.add('active');
+    }
+
+    // 3. Khởi tạo Cơ sở dữ liệu IndexedDB (Lưu vĩnh viễn không sợ mất khi F5)
+    let db;
+    const dbRequest = indexedDB.open('MemoryPortalDB', 1);
+
+    dbRequest.onupgradeneeded = function(e) {
+      db = e.target.result;
+      if (!db.objectStoreNames.contains('posts')) {
+        db.createObjectStore('posts', { keyPath: 'id' });
+      }
+    };
+
+    dbRequest.onsuccess = function(e) {
+      db = e.target.result;
+      loadAllPosts(); // Tải lại bài đăng khi mở web
+    };
+
+    // 4. Quản lý Chế độ Quản lý (Admin) - Bảo mật nút Xóa
+    const ADMIN_PASSWORD = "123456"; // Mật khẩu quản lý mặc định
+    let isAdmin = false;
+
+    function toggleAdminMode(event) {
+      if (event) event.preventDefault();
+      
+      if (!isAdmin) {
+        const password = prompt("Nhập mật khẩu người quản lý để bật quyền xóa:");
+        if (password === ADMIN_PASSWORD) {
+          isAdmin = true;
+          document.body.classList.add('admin-mode');
+          document.getElementById('adminIcon').className = "fa-solid fa-lock-open";
+          document.getElementById('adminText').innerText = "Quản Lý (Đã Bật)";
+          alert("Xác thực thành công! Nút xóa bài đăng đã hiện.");
+        } else if (password !== null) {
+          alert("Mật khẩu không chính xác!");
+        }
+      } else {
+        isAdmin = false;
+        document.body.classList.remove('admin-mode');
+        document.getElementById('adminIcon').className = "fa-solid fa-lock";
+        document.getElementById('adminText').innerText = "Chế Độ Xem";
+        alert("Đã khóa chế độ quản lý!");
+      }
+    }
+
+    // 5. Quản lý Modal Popup
+    const uploadModal = document.getElementById('uploadModal');
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    function toggleModal(show) {
+      if(show) uploadModal.classList.add('active');
+      else {
+        uploadModal.classList.remove('active');
+        document.getElementById('mediaFileInput').value = '';
+        document.getElementById('mediaCaptionInput').value = '';
+      }
+    }
+    openModalBtn.addEventListener('click', () => toggleModal(true));
+    closeModalBtn.addEventListener('click', () => toggleModal(false));
+    cancelBtn.addEventListener('click', () => toggleModal(false));
+
+    // 6. Đăng bài mới và lưu vào IndexedDB
+    const submitPostBtn = document.getElementById('submitPostBtn');
+    const feedContainer = document.getElementById('feedContainer');
+    const galleryContainer = document.getElementById('galleryContainer');
+    const videoContainer = document.getElementById('videoContainer');
+    const emptyMsg = document.getElementById('emptyMsg');
+    const emptyGallery = document.getElementById('emptyGallery');
+    const emptyVideo = document.getElementById('emptyVideo');
+    const postCountSpan = document.getElementById('postCount');
+
+    submitPostBtn.addEventListener('click', () => {
+      const fileInput = document.getElementById('mediaFileInput');
+      const captionInput = document.getElementById('mediaCaptionInput');
+
+      if (!fileInput.files || fileInput.files.length === 0) {
+        alert('Vui lòng chọn một file ảnh hoặc video trước khi tải lên!');
+        return;
+      }
+
+      const file = fileInput.files[0];  
+      const caption = captionInput.value.trim();
+      const reader = new FileReader();
+
+      reader.onload = function(uploadEvent) {
+        const fileBase64 = uploadEvent.target.result;
+        const isVideo = file.type.startsWith('video/');
+        const postTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) + ' - ' + new Date().toLocaleDateString();
+
+        const newPost = {
+          id: Date.now(),
+          url: fileBase64,
+          isVideo: isVideo,
+          caption: caption ? caption : 'Không có mô tả cho kỷ niệm này.',
+          time: postTime
+        };
+
+        const tx = db.transaction('posts', 'readwrite');
+        const store = tx.objectStore('posts');
+        store.add(newPost);
+
+        tx.oncomplete = function() {
+          loadAllPosts();
+          toggleModal(false);
+        };
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    // 7. Tải và hiển thị bài viết từ IndexedDB
+    function loadAllPosts() {
+      if (!db) return;
+      const tx = db.transaction('posts', 'readonly');
+      const store = tx.objectStore('posts');
+      const request = store.getAll();
+
+      request.onsuccess = function() {
+        const posts = request.result.sort((a, b) => b.id - a.id); // Bài mới xếp đầu
+
+        feedContainer.innerHTML = '';
+        galleryContainer.innerHTML = '';
+        videoContainer.innerHTML = '';
+        postCountSpan.innerText = posts.length;
+
+        if (posts.length === 0) {
+          emptyMsg.style.display = 'block';
+          emptyGallery.style.display = 'block';
+          emptyVideo.style.display = 'block';
+          return;
+        }
+        emptyMsg.style.display = 'none';
+        emptyGallery.style.display = 'none';
+        emptyVideo.style.display = 'none';
+
+        let hasVideo = false;
+        let hasImage = false;
+
+        posts.forEach((post) => {
+          // Render Trang Chủ
+          const mediaCard = document.createElement('div');
+          mediaCard.className = 'media-card';
+          let mediaHtml = post.isVideo ? `<video src="${post.url}" controls></video>` : `<img src="${post.url}" alt="Kỷ niệm">`;
+
+          mediaCard.innerHTML = `
+            ${mediaHtml}
+            <div class="media-body">
+              <p class="media-caption">${escapeHtml(post.caption)}</p>
+              <div class="media-footer">
+                <span><i class="fa-regular fa-clock"></i> Thời gian: ${post.time}</span>
+                <button class="delete-btn" onclick="deletePost(${post.id})"><i class="fa-solid fa-trash-can"></i> Xóa bài</button>
+              </div>
+            </div>
+          `;
+          feedContainer.appendChild(mediaCard);
+
+          // Render Bộ Sưu Tập / Video
+          if (post.isVideo) {
+            hasVideo = true;
+            const vCard = document.createElement('div');
+            vCard.className = 'media-card';
+            vCard.innerHTML = mediaCard.innerHTML;
+            videoContainer.appendChild(vCard);
+          } else {
+            hasImage = true;
+            const imgThumb = document.createElement('div');
+            imgThumb.style.cssText = "border-radius: 4px; overflow: hidden; border: 1px solid #ddd; background: #000; height: 120px;";
+            imgThumb.innerHTML = `<img src="${post.url}" style="width: 100%; height: 100%; object-fit: cover;">`;
+            galleryContainer.appendChild(imgThumb);
+          }
+        });
+
+        if (!hasImage) emptyGallery.style.display = 'block';
+        if (!hasVideo) emptyVideo.style.display = 'block';
+      };
+    }
+
+    // 8. Xóa bài đăng (Chỉ dùng được khi bật quyền Admin)
+    window.deletePost = function(id) {
+      if(!isAdmin) {
+        alert("Bạn không có quyền xóa bài đăng!");
+        return;
+      }
+      if(confirm('Bạn có chắc chắn muốn xóa bài đăng kỷ niệm này?')) {
+        const tx = db.transaction('posts', 'readwrite');
+        const store = tx.objectStore('posts');
+        store.delete(id);
+        tx.oncomplete = function() {
+          loadAllPosts();
+        };
+      }
+    };
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // 9. Tùy chỉnh và lưu hình nền
+    const bgTypeSelect = document.getElementById('bgTypeSelect');
+    const customColorPicker = document.getElementById('customColorPicker');
+    const bgImageInput = document.getElementById('bgImageInput');
+
+    bgTypeSelect.addEventListener('change', (e) => {
+      const value = e.target.value;
+      customColorPicker.style.display = 'none';
+      bgImageInput.style.display = 'none';
+      
+      if (value === 'default') {
+        document.body.style.backgroundColor = '#f0f2f5';
+        document.body.style.backgroundImage = 'none';
+        localStorage.removeItem('bgConfig');
+      } else if (value === 'color') {
+        customColorPicker.style.display = 'block';
+        document.body.style.backgroundColor = customColorPicker.value;
+        document.body.style.backgroundImage = 'none';
+        localStorage.setItem('bgConfig', JSON.stringify({ type: 'color', val: customColorPicker.value }));
+      } else if (value === 'image') {
+        bgImageInput.style.display = 'block';
+        bgImageInput.click();
+      }
+    });
+
+    customColorPicker.addEventListener('input', (e) => {
+      const color = e.target.value;
+      document.body.style.backgroundColor = color;
+      localStorage.setItem('bgConfig', JSON.stringify({ type: 'color', val: color }));
+    });
+
+    bgImageInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const imageUrl = event.target.result;
+          document.body.style.backgroundImage = `url('${imageUrl}')`;
+          localStorage.setItem('bgConfig', JSON.stringify({ type: 'image', val: imageUrl }));
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    });
+
+    // Khôi phục nền đã lưu
+    const savedBg = JSON.parse(localStorage.getItem('bgConfig'));
+    if (savedBg) {
+      if (savedBg.type === 'color') {
+        bgTypeSelect.value = 'color';
+        customColorPicker.style.display = 'block';
+        customColorPicker.value = savedBg.val;
+        document.body.style.backgroundColor = savedBg.val;
+      } else if (savedBg.type === 'image') {
+        bgTypeSelect.value = 'image';
+        document.body.style.backgroundImage = `url('${savedBg.val}')`;
+      }
+    }
+  </script>
+</body>
+</html>
