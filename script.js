@@ -1,4 +1,3 @@
-javascript
 // 1. Hiển thị ngày tháng hiện tại lên Banner
 const dateBox = document.getElementById('currentDate');
 const now = new Date();
