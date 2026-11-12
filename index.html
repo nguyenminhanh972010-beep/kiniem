@@ -95,7 +95,6 @@
     }
     .upload-trigger-btn:hover { background: #218838; }
 
-    /* Nút Sao lưu & Khôi phục */
     .backup-btn {
       width: 100%;
       padding: 9px 12px;
@@ -116,7 +115,6 @@
     .btn-import { background: #e67e22; color: white; margin-bottom: 0; }
     .btn-import:hover { background: #d35400; }
 
-    /* Giao diện bài viết trên dòng thời gian */
     .feed-container { display: flex; flex-direction: column; gap: 18px; }
     .article-card {
       background: white;
@@ -207,7 +205,6 @@
     }
     .title-input:focus { outline: none; border-color: #004080; }
 
-    /* Thanh công cụ định dạng Word */
     .word-toolbar {
       display: flex;
       flex-wrap: wrap;
@@ -241,10 +238,9 @@
     .tool-btn.insert-media:hover { background: #cfe4ff; }
     .toolbar-divider { width: 1px; height: 20px; background: #ccc; margin: 0 4px; }
 
-    /* Vùng soạn thảo văn bản */
     .word-editor {
-      min-height: 300px;
-      max-height: 420px;
+      min-height: 280px;
+      max-height: 380px;
       overflow-y: auto;
       border: 1px solid #ccc;
       border-radius: 0 0 4px 4px;
@@ -279,7 +275,6 @@
     .page-section { display: none; }
     .page-section.active-section { display: block; }
 
-    /* Lightbox xem ảnh phóng to */
     .lightbox {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center;
@@ -315,7 +310,6 @@
   </div>
 
   <div class="main-layout">
-    <!-- Cột trái -->
     <div>
       <div class="box">
         <div class="box-header"><i class="fa-solid fa-pen-to-square"></i> Đăng Kỷ Niệm</div>
@@ -343,12 +337,11 @@
         <div class="box-content" style="font-size: 13px; line-height: 1.8;">
           <p><i class="fa-solid fa-newspaper"></i> Tổng bài viết: <strong id="postCount">0</strong></p>
           <p><i class="fa-solid fa-image"></i> Tổng số ảnh: <strong id="imgCount">0</strong></p>
-          <p><i class="fa-solid fa-shield-halved"></i> Trạng thái: <span id="persistStatus" style="color: #28a745; font-weight: bold;">Tự động lưu</span></p>
+          <p><i class="fa-solid fa-shield-halved"></i> Trạng thái: <span id="persistStatus" style="color: #28a745; font-weight: bold;">Hoạt động tốt</span></p>
         </div>
       </div>
     </div>
 
-    <!-- Cột giữa -->
     <div>
       <div id="section-home" class="page-section active-section">
         <div class="box">
@@ -364,7 +357,7 @@
 
       <div id="section-gallery" class="page-section">
         <div class="box">
-          <div class="box-header"><i class="fa-solid fa-images"></i> Bộ Sưu Tập Hình Ảnh (Tự động tổng hợp)</div>
+          <div class="box-header"><i class="fa-solid fa-images"></i> Bộ Sưu Tập Hình Ảnh</div>
           <div class="box-content">
             <div id="galleryContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px;"></div>
             <p id="emptyGallery" style="text-align: center; color: #777; padding: 30px 0; font-size: 13px;">Chưa có hình ảnh nào trong bộ sưu tập.</p>
@@ -374,7 +367,7 @@
 
       <div id="section-videos" class="page-section">
         <div class="box">
-          <div class="box-header"><i class="fa-solid fa-video"></i> Thư Viện Video (Tự động tổng hợp)</div>
+          <div class="box-header"><i class="fa-solid fa-video"></i> Thư Viện Video</div>
           <div class="box-content">
             <div id="videoContainer" class="feed-container"></div>
             <p id="emptyVideo" style="text-align: center; color: #777; padding: 30px 0; font-size: 13px;">Chưa có video nào được đăng tải.</p>
@@ -386,21 +379,18 @@
         <div class="box">
           <div class="box-header"><i class="fa-solid fa-circle-info"></i> Giới Thiệu Về Trang Web</div>
           <div class="box-content" style="font-size: 13.5px; line-height: 1.7; color: #444;">
-            <p style="margin-bottom: 10px;">✨ <strong>Cổng Thông Tin Kỷ Niệm Cá Nhân</strong> giúp bạn lưu giữ các bài viết dài, nhật ký hành trình kèm hình ảnh/video xen kẽ giống như soạn thảo trên Word.</p>
-            <p>💡 Sử dụng tính năng <strong>Sao Lưu & Khôi Phục</strong> ở cột phải để tải toàn bộ kỷ niệm về máy tính/điện thoại và đồng bộ sang các thiết bị khác bất cứ lúc nào.</p>
+            <p style="margin-bottom: 10px;">✨ <strong>Cổng Thông Tin Kỷ Niệm Cá Nhân</strong> được thiết kế theo phong cách hiện đại, hỗ trợ soạn thảo văn bản và chèn ảnh linh hoạt ở bất kỳ vị trí nào.</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Cột phải -->
     <div>
-      <!-- Khu vực Sao Lưu & Khôi Phục Vĩnh Viễn -->
       <div class="box">
         <div class="box-header" style="background: #1e7e34;"><i class="fa-solid fa-cloud-arrow-down"></i> Sao Lưu & Khôi Phục</div>
         <div class="box-content">
           <p style="font-size: 12px; color: #555; margin-bottom: 10px; line-height: 1.5;">
-            Tải file sao lưu về máy để giữ vĩnh viễn hoặc mở lại trên điện thoại/máy tính khác:
+            Xuất file lưu trữ để chuyển dữ liệu sang thiết bị khác hoặc lưu phòng hờ:
           </p>
           <button type="button" onclick="exportBackup()" class="backup-btn btn-export">
             <i class="fa-solid fa-download"></i> Xuất Dữ Liệu (Sao Lưu)
@@ -426,18 +416,10 @@
           <input type="file" id="bgImageInput" accept="image/*" style="display: none;">
         </div>
       </div>
-
-      <div class="box">
-        <div class="box-header"><i class="fa-solid fa-lightbulb"></i> Mẹo Soạn Thảo</div>
-        <div class="box-content" style="font-size: 12.5px; line-height: 1.6; color: #555;">
-          <p style="margin-bottom: 6px;">• Bấm chuột vào <strong>bất kỳ dòng nào</strong> trong khung soạn thảo rồi bấm <strong>"Chèn Ảnh"</strong> để ảnh nằm ngay giữa đoạn văn.</p>
-          <p>• Lưu ý mở web bằng trình duyệt thường (không dùng Tab Ẩn Danh) để trình duyệt ghi nhớ dữ liệu.</p>
-        </div>
-      </div>
     </div>
   </div>
 
-  <!-- Modal Soạn Thảo Văn Bản Như Word -->
+  <!-- Modal Soạn Thảo -->
   <div id="uploadModal" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-title">
@@ -445,9 +427,8 @@
         <button id="closeModalBtn" style="background:none; border:none; color:white; font-size:20px; cursor:pointer;">&times;</button>
       </div>
       <div class="modal-body">
-        <input type="text" id="postTitleInput" class="title-input" placeholder="Nhập tiêu đề bài viết (Không bắt buộc)...">
+        <input type="text" id="postTitleInput" class="title-input" placeholder="Nhập tiêu đề bài viết...">
         
-        <!-- Thanh công cụ Word -->
         <div class="word-toolbar">
           <button type="button" class="tool-btn" onclick="execCmd('bold')" title="In đậm"><i class="fa-solid fa-bold"></i></button>
           <button type="button" class="tool-btn" onclick="execCmd('italic')" title="In nghiêng"><i class="fa-solid fa-italic"></i></button>
@@ -457,7 +438,7 @@
           <button type="button" class="tool-btn" onclick="execCmd('justifyCenter')" title="Căn giữa"><i class="fa-solid fa-align-center"></i></button>
           <button type="button" class="tool-btn" onclick="execCmd('justifyRight')" title="Căn phải"><i class="fa-solid fa-align-right"></i></button>
           <div class="toolbar-divider"></div>
-          <button type="button" class="tool-btn" onclick="execCmd('insertUnorderedList')" title="Danh sách chấm"><i class="fa-solid fa-list-ul"></i></button>
+          <button type="button" class="tool-btn" onclick="execCmd('insertUnorderedList')" title="Danh sách"><i class="fa-solid fa-list-ul"></i></button>
           <input type="color" onchange="execCmd('foreColor', this.value)" title="Màu chữ" style="width: 28px; height: 26px; border: 1px solid #ccc; cursor: pointer; padding: 1px;">
           <div class="toolbar-divider"></div>
           <button type="button" class="tool-btn insert-media" onclick="triggerInsertImage()">
@@ -468,12 +449,10 @@
           </button>
         </div>
 
-        <!-- Input ẩn để chọn file chèn vào giữa văn bản -->
         <input type="file" id="inlineImageInput" accept="image/*" multiple style="display: none;">
         <input type="file" id="inlineVideoInput" accept="video/*" style="display: none;">
 
-        <!-- Vùng gõ văn bản -->
-        <div id="wordEditor" class="word-editor" contenteditable="true" data-placeholder="Bắt đầu viết câu chuyện của bạn tại đây... Đặt con trỏ chuột ở bất kỳ đâu và bấm 'Chèn Ảnh' để chèn ảnh vào giữa bài viết!"></div>
+        <div id="wordEditor" class="word-editor" contenteditable="true" data-placeholder="Nhập nội dung câu chuyện... Bạn có thể đặt con trỏ chuột vào bất cứ đâu và bấm 'Chèn Ảnh' để chèn ảnh vào giữa bài!"></div>
       </div>
       <div class="modal-footer">
         <span id="statusText" style="font-size: 12px; color: #004080; font-weight: bold;"></span>
@@ -485,20 +464,17 @@
     </div>
   </div>
 
-  <!-- Lightbox xem ảnh -->
   <div id="lightbox" class="lightbox" onclick="this.classList.remove('active')">
     <span class="lightbox-close">&times;</span>
     <img id="lightboxImg" src="" alt="Phóng to">
   </div>
 
   <script>
-    // Hiển thị ngày tháng hiện tại
     const dateBox = document.getElementById('currentDate');
     const now = new Date();
     const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
     dateBox.innerText = `${days[now.getDay()]} - Ngày ${now.getDate()} Tháng ${now.getMonth() + 1} Năm ${now.getFullYear()}`;
 
-    // Chuyển tab
     function switchTab(tabId, event) {
       if (event) event.preventDefault();
       document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active-section'));
@@ -508,7 +484,6 @@
       if (activeNav) activeNav.classList.add('active');
     }
 
-    // Chế độ Quản lý (Mật khẩu: 123456)
     const ADMIN_PASSWORD = "123456";
     let isAdmin = false;
 
@@ -533,10 +508,7 @@
       }
     }
 
-    // ==========================================
-    // HỆ THỐNG LƯU TRỮ INDEXEDDB + BẢO VỆ BỀN VỮNG
-    // ==========================================
-    const DB_NAME = "MemoryPortalDB_V2";
+    const DB_NAME = "MemoryPortalDB_V3";
     const STORE_NAME = "articles";
     const SETTINGS_STORE = "settings";
     let db;
@@ -553,15 +525,8 @@
             database.createObjectStore(SETTINGS_STORE, { keyPath: "key" });
           }
         };
-        request.onsuccess = async (e) => {
+        request.onsuccess = (e) => {
           db = e.target.result;
-          // Yêu cầu trình duyệt giữ dữ liệu bền vững, không tự động dọn dẹp
-          if (navigator.storage && navigator.storage.persist) {
-            const isPersisted = await navigator.storage.persist();
-            if (isPersisted) {
-              document.getElementById('persistStatus').innerText = "Đã khóa an toàn";
-            }
-          }
           resolve(db);
         };
         request.onerror = (e) => reject(e.target.error);
@@ -581,10 +546,7 @@
       return new Promise((resolve, reject) => {
         const tx = db.transaction(STORE_NAME, "readonly");
         const req = tx.objectStore(STORE_NAME).getAll();
-        req.onsuccess = () => {
-          const sorted = req.result.sort((a, b) => b.id - a.id);
-          resolve(sorted);
-        };
+        req.onsuccess = () => resolve(req.result.sort((a, b) => b.id - a.id));
         req.onerror = (e) => reject(e.target.error);
       });
     }
@@ -615,86 +577,50 @@
       });
     }
 
-    // ==========================================
-    // TÍNH NĂNG SAO LƯU (XUẤT FILE) & KHÔI PHỤC (NHẬP FILE)
-    // ==========================================
     async function exportBackup() {
       const statusEl = document.getElementById('backupStatus');
       statusEl.innerText = "Đang đóng gói dữ liệu...";
       try {
         const articles = await getAllArticlesFromDB();
         const bgConfig = await getBgSettingFromDB();
-        
-        const backupData = {
-          appName: "CongThongTinKyNiemCaNhan",
-          exportedAt: new Date().toISOString(),
-          bgConfig: bgConfig,
-          articles: articles
-        };
-
-        const jsonStr = JSON.stringify(backupData);
-        const blob = new Blob([jsonStr], { type: "application/json" });
+        const backupData = { appName: "CongThongTinKyNiem", bgConfig, articles };
+        const blob = new Blob([JSON.stringify(backupData)], { type: "application/json" });
         const url = URL.createObjectURL(blob);
-        
         const a = document.createElement("a");
-        const dateStr = new Date().toISOString().slice(0, 10);
         a.href = url;
-        a.download = `SaoLuu_KyNiem_${dateStr}.json`;
+        a.download = `SaoLuu_KyNiem_${new Date().toISOString().slice(0, 10)}.json`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-
         statusEl.style.color = "#1e7e34";
-        statusEl.innerText = `Đã tải file sao lưu (${articles.length} bài)!`;
+        statusEl.innerText = `Đã xuất ${articles.length} bài!`;
       } catch (err) {
         statusEl.style.color = "#dc3545";
-        statusEl.innerText = "Lỗi xuất dữ liệu: " + err.message;
+        statusEl.innerText = "Lỗi xuất dữ liệu";
       }
     }
 
     function importBackup(event) {
       const file = event.target.files[0];
       if (!file) return;
-
-      const statusEl = document.getElementById('backupStatus');
-      statusEl.style.color = "#004080";
-      statusEl.innerText = "Đang đọc file sao lưu...";
-
       const reader = new FileReader();
       reader.onload = async (e) => {
         try {
           const data = JSON.parse(e.target.result);
-          if (!data.articles || !Array.isArray(data.articles)) {
-            throw new Error("File không đúng định dạng sao lưu của web!");
-          }
-
-          for (const art of data.articles) {
-            await saveArticleToDB(art);
-          }
-
-          if (data.bgConfig) {
-            await saveBgSettingToDB(data.bgConfig);
-            applyBackground(data.bgConfig);
-          }
-
+          if (!data.articles) throw new Error("File không hợp lệ");
+          for (const art of data.articles) { await saveArticleToDB(art); }
+          if (data.bgConfig) { await saveBgSettingToDB(data.bgConfig); applyBackground(data.bgConfig); }
           await renderAll();
-          statusEl.style.color = "#1e7e34";
-          statusEl.innerText = `Khôi phục thành công ${data.articles.length} bài viết!`;
-          alert(`Đã khôi phục thành công ${data.articles.length} bài viết kỷ niệm!`);
+          alert(`Khôi phục thành công ${data.articles.length} bài viết!`);
         } catch (err) {
-          statusEl.style.color = "#dc3545";
-          statusEl.innerText = "File lỗi hoặc không hợp lệ!";
-          alert("Không thể khôi phục: " + err.message);
+          alert("Lỗi khôi phục: " + err.message);
         }
         event.target.value = '';
       };
       reader.readAsText(file);
     }
 
-    // ==========================================
-    // TRÌNH SOẠN THẢO WORD & CHÈN ẢNH/VIDEO GIỮA VĂN BẢN
-    // ==========================================
     const uploadModal = document.getElementById('uploadModal');
     const wordEditor = document.getElementById('wordEditor');
     const postTitleInput = document.getElementById('postTitleInput');
@@ -705,9 +631,7 @@
       const sel = window.getSelection();
       if (sel.rangeCount > 0) {
         const range = sel.getRangeAt(0);
-        if (wordEditor.contains(range.commonAncestorContainer)) {
-          savedRange = range;
-        }
+        if (wordEditor.contains(range.commonAncestorContainer)) savedRange = range;
       }
     }
 
@@ -731,13 +655,10 @@
       if (sel.rangeCount > 0) {
         const range = sel.getRangeAt(0);
         range.deleteContents();
-        
         const brAfter = document.createElement('div');
         brAfter.innerHTML = '<br>';
-        
         range.insertNode(brAfter);
         range.insertNode(node);
-        
         range.setStartAfter(brAfter);
         range.collapse(true);
         sel.removeAllRanges();
@@ -754,17 +675,14 @@
         reader.onload = (e) => {
           const img = new Image();
           img.onload = () => {
-            let width = img.width;
-            let height = img.height;
+            let width = img.width, height = img.height;
             if (width > maxWidth) {
               height = Math.round((height * maxWidth) / width);
               width = maxWidth;
             }
             const canvas = document.createElement('canvas');
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, width, height);
+            canvas.width = width; canvas.height = height;
+            canvas.getContext('2d').drawImage(img, 0, 0, width, height);
             resolve(canvas.toDataURL('image/jpeg', quality));
           };
           img.src = e.target.result;
@@ -773,15 +691,8 @@
       });
     }
 
-    function triggerInsertImage() {
-      saveSelection();
-      document.getElementById('inlineImageInput').click();
-    }
-
-    function triggerInsertVideo() {
-      saveSelection();
-      document.getElementById('inlineVideoInput').click();
-    }
+    function triggerInsertImage() { saveSelection(); document.getElementById('inlineImageInput').click(); }
+    function triggerInsertVideo() { saveSelection(); document.getElementById('inlineVideoInput').click(); }
 
     document.getElementById('inlineImageInput').addEventListener('change', async function(e) {
       const files = Array.from(e.target.files);
@@ -800,7 +711,7 @@
     document.getElementById('inlineVideoInput').addEventListener('change', function(e) {
       const file = e.target.files[0];
       if (!file) return;
-      statusText.innerText = "Đang tải video vào bài...";
+      statusText.innerText = "Đang tải video...";
       const reader = new FileReader();
       reader.onload = (ev) => {
         const video = document.createElement('video');
@@ -852,12 +763,12 @@
       const hasMedia = wordEditor.querySelector('img, video') !== null;
 
       if (!plainText && !hasMedia && !title) {
-        alert("Vui lòng nhập nội dung hoặc chèn ít nhất một ảnh/video trước khi đăng!");
+        alert("Vui lòng nhập nội dung bài viết!");
         return;
       }
 
       submitPostBtn.disabled = true;
-      statusText.innerText = "Đang lưu bài viết...";
+      statusText.innerText = "Đang lưu bài...";
 
       try {
         const postTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) + ' - ' + new Date().toLocaleDateString('vi-VN');
@@ -867,12 +778,11 @@
           content: htmlContent,
           time: postTime
         };
-
         await saveArticleToDB(newArticle);
         await renderAll();
         toggleModal(false);
       } catch (err) {
-        alert("Có lỗi khi lưu bài: " + err.message);
+        alert("Lỗi lưu bài: " + err.message);
       } finally {
         submitPostBtn.disabled = false;
         statusText.innerText = "";
@@ -890,8 +800,7 @@
       videoContainer.innerHTML = '';
       document.getElementById('postCount').innerText = articles.length;
 
-      let totalImages = 0;
-      let totalVideos = 0;
+      let totalImages = 0, totalVideos = 0;
 
       if (articles.length === 0) {
         document.getElementById('emptyMsg').style.display = 'block';
@@ -906,13 +815,12 @@
       articles.forEach((art) => {
         const card = document.createElement('div');
         card.className = 'article-card';
-        
         const titleHtml = art.title ? `<div class="article-title">${escapeHTML(art.title)}</div>` : '';
         card.innerHTML = `
           ${titleHtml}
           <div class="article-content">${art.content}</div>
           <div class="article-footer">
-            <span><i class="fa-regular fa-clock"></i> Đăng lúc: ${art.time}</span>
+            <span><i class="fa-regular fa-clock"></i> ${art.time}</span>
             <button class="delete-btn" onclick="deletePost(${art.id})"><i class="fa-solid fa-trash-can"></i> Xóa bài</button>
           </div>
         `;
@@ -925,7 +833,7 @@
           totalImages++;
           const thumb = document.createElement('div');
           thumb.style.cssText = "border-radius: 4px; overflow: hidden; border: 1px solid #ddd; background: #000; height: 140px; cursor: pointer;";
-          thumb.innerHTML = `<img src="${img.src}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">`;
+          thumb.innerHTML = `<img src="${img.src}" style="width: 100%; height: 100%; object-fit: cover;">`;
           thumb.onclick = () => openLightbox(img.src);
           galleryContainer.appendChild(thumb);
         });
@@ -934,10 +842,7 @@
           totalVideos++;
           const vCard = document.createElement('div');
           vCard.className = 'article-card';
-          vCard.innerHTML = `
-            <video src="${vid.src}" controls style="width: 100%; max-height: 400px; background: #000; border-radius: 4px;"></video>
-            <div style="font-size: 12px; color: #666; margin-top: 8px;"><i class="fa-regular fa-clock"></i> Từ bài viết lúc: ${art.time}</div>
-          `;
+          vCard.innerHTML = `<video src="${vid.src}" controls style="width: 100%; max-height: 400px; background: #000; border-radius: 4px;"></video>`;
           videoContainer.appendChild(vCard);
         });
       });
@@ -948,6 +853,84 @@
     }
 
     function escapeHTML(str) {
-      return str.replace(/[&<>'"]/g, tag => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
-      }[tag]));
+      return str.replace(/[&<>'"]/g, tag => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'}[tag]));
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+
+    window.deletePost = async function(id) {
+      if (!isAdmin) {
+        alert("Bạn cần bật chế độ Quản Lý ở menu để xóa bài!");
+        return;
+      }
+      if (confirm('Bạn có chắc muốn xóa bài này?')) {
+        await deleteArticleFromDB(id);
+        await renderAll();
+      }
+    };
+
+    const bgTypeSelect = document.getElementById('bgTypeSelect');
+    const customColorPicker = document.getElementById('customColorPicker');
+    const bgImageInput = document.getElementById('bgImageInput');
+
+    function applyBackground(bgObj) {
+      if (!bgObj || bgObj.type === 'default') {
+        bgTypeSelect.value = 'default';
+        customColorPicker.style.display = 'none';
+        bgImageInput.style.display = 'none';
+        document.body.style.backgroundColor = '#f0f2f5';
+        document.body.style.backgroundImage = 'none';
+      } else if (bgObj.type === 'color') {
+        bgTypeSelect.value = 'color';
+        customColorPicker.style.display = 'block';
+        customColorPicker.value = bgObj.val;
+        document.body.style.backgroundImage = 'none';
+        document.body.style.backgroundColor = bgObj.val;
+      } else if (bgObj.type === 'image') {
+        bgTypeSelect.value = 'image';
+        bgImageInput.style.display = 'block';
+        document.body.style.backgroundImage = `url(${bgObj.val})`;
+      }
+    }
+
+    bgTypeSelect.addEventListener('change', async (e) => {
+      const val = e.target.value;
+      if (val === 'default') {
+        await saveBgSettingToDB({ type: 'default' });
+        applyBackground({ type: 'default' });
+      } else if (val === 'color') {
+        customColorPicker.style.display = 'block';
+        await saveBgSettingToDB({ type: 'color', val: customColorPicker.value });
+      } else if (val === 'image') {
+        bgImageInput.style.display = 'block';
+        bgImageInput.click();
+      }
+    });
+
+    customColorPicker.addEventListener('input', async (e) => {
+      const cfg = { type: 'color', val: e.target.value };
+      document.body.style.backgroundColor = e.target.value;
+      await saveBgSettingToDB(cfg);
+    });
+
+    bgImageInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const compressed = await compressImage(file, 1600, 0.8);
+      const cfg = { type: 'image', val: compressed };
+      applyBackground(cfg);
+      await saveBgSettingToDB(cfg);
+    });
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      await initDB();
+      const savedBg = await getBgSettingFromDB();
+      if (savedBg) applyBackground(savedBg);
+      await renderAll();
+    });
+  </script>
+</body>
+</html>
