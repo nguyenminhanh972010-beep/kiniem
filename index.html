@@ -5,58 +5,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cổng Thông Tin Kỷ Niệm Cá Nhân</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
-:root{--navy:#003366;--blue:#064985;--bright:#075bb1;--green:#28a745;--bg:#f0f2f5;--text:#263238}
+:root {
+  --navy:#003366;
+  --blue:#064985;
+  --bright:#075bb1;
+  --green:#28a745;
+  --bg:#f0f2f5;
+  --text:#263238;
+}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-button,input,select{font:inherit}button{cursor:pointer}
-.site{max-width:1200px;margin:10px auto 30px;background:#fff;box-shadow:0 2px 8px #00000018}
-.banner{background:linear-gradient(120deg,#064985,#001d3a);color:#fff;padding:23px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.site{max-width:1200px;margin:10px auto 30px;background:white;box-shadow:0 2px 8px #0002}
+.banner{background:linear-gradient(120deg,#064985,#001d3a);color:white;padding:23px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .banner h1{font-size:24px;margin:0 0 5px;text-transform:uppercase}
-.banner p{font-size:13px;margin:0;opacity:.9}
-#today{font-size:12px;text-align:right;white-space:nowrap}
+.banner p{font-size:13px;margin:0}
+#today{font-size:12px;text-align:right}
 nav{display:flex;flex-wrap:wrap;background:#003366;border-bottom:4px solid #0871c9}
 nav button{border:0;background:transparent;color:white;padding:13px 16px;font-weight:bold;font-size:12px}
 nav button:hover,nav button.active{background:#075bb1}
 nav .manage{margin-left:auto;color:#ffd54f}
 .layout{display:grid;grid-template-columns:225px minmax(0,1fr) 225px;gap:14px;padding:14px 10px}
-.panel{background:#fff;border:1px solid #d9dfe5;border-radius:4px;box-shadow:0 1px 3px #00000012;margin-bottom:13px;overflow:hidden}
-.panel h3{margin:0;padding:10px 11px;background:#064985;color:#fff;font-size:12px;text-transform:uppercase}
+.panel{background:white;border:1px solid #d9dfe5;border-radius:4px;margin-bottom:13px;overflow:hidden}
+.panel h3{margin:0;padding:10px 11px;background:#064985;color:white;font-size:12px}
 .panel-body{padding:11px}
 .primary{width:100%;border:0;border-radius:4px;padding:11px;background:var(--green);color:white;font-weight:bold}
 .primary:hover{background:#218838}
 .secondary{border:1px solid #cbd5df;background:#f7f9fb;color:#234;padding:8px 11px;border-radius:4px}
 .menu{list-style:none;margin:0;padding:0}
-.menu button{width:100%;text-align:left;padding:9px 10px;border:0;border-bottom:1px dashed #e4e7eb;background:#fff;color:#064985;font-size:13px}
-.menu button:hover{background:#f3f7fb}
+.menu button{width:100%;text-align:left;padding:9px 10px;border:0;border-bottom:1px dashed #e4e7eb;background:white;color:#064985;font-size:13px}
 .stat{font-size:13px;line-height:1.9}
 .stat strong{color:#064985}
-.setting label{font-size:12px;display:block;margin:0 0 6px}
+.setting label{font-size:12px;display:block;margin-bottom:6px}
 .setting select{width:100%;padding:8px;border:1px solid #ccd2d8;border-radius:4px}
 .feed{display:flex;flex-direction:column;gap:14px}
-.empty{text-align:center;color:#777;padding:40px 10px;font-size:13px}
-.post{border:1px solid #d5dbe1;border-radius:5px;padding:15px;background:white;box-shadow:0 1px 3px #0000000c}
-.post h2{font-size:18px;color:#003366;margin:0 0 9px;padding-bottom:8px;border-bottom:1px solid #eee}
+.empty{text-align:center;color:#777;padding:35px 10px;font-size:13px}
+.post{border:1px solid #d5dbe1;border-radius:5px;padding:15px;background:white}
+.post h2{font-size:18px;color:#003366;margin:0 0 9px;padding-bottom:8px;border-bottom:1px solid #eee;overflow-wrap:anywhere}
 .post-content{font-size:14px;line-height:1.7;overflow-wrap:anywhere}
-.post-content img{max-width:100%;height:auto;display:block;margin:12px auto;border-radius:5px}
+.post-content img{max-width:100%;height:auto;display:block;margin:12px auto;border-radius:5px;cursor:pointer}
 .post-meta{border-top:1px solid #eee;margin-top:12px;padding-top:9px;color:#718096;font-size:11px}
-.page{display:none}.page.active{display:block}
+.page{display:none}
+.page.active{display:block}
 .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
 .gallery img{width:100%;height:125px;object-fit:cover;border-radius:4px;cursor:pointer;border:1px solid #ddd}
 .modal{display:none;position:fixed;inset:0;background:#0009;z-index:10;align-items:center;justify-content:center;padding:12px}
 .modal.open{display:flex}
-.modal-box{background:#fff;width:min(780px,100%);max-height:94vh;display:flex;flex-direction:column;border-radius:7px;overflow:hidden;box-shadow:0 8px 35px #0005}
-.modal-head{background:#064985;color:#fff;padding:13px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:bold}
+.modal-box{background:white;width:min(780px,100%);max-height:94vh;display:flex;flex-direction:column;border-radius:7px;overflow:hidden}
+.modal-head{background:#064985;color:white;padding:13px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:bold}
 .icon-btn{background:transparent;border:0;color:inherit;font-size:22px}
 .modal-body{padding:14px;overflow:auto}
 .title-input,.author-input{width:100%;padding:10px;border:1px solid #cbd2d9;border-radius:4px;margin-bottom:10px}
-.toolbar{display:flex;gap:5px;flex-wrap:wrap;padding:7px;background:#f1f3f5;border:1px solid #cbd2d9;border-bottom:0;border-radius:4px 4px 0 0}
-.toolbar button{background:#fff;border:1px solid #d1d7dd;border-radius:3px;padding:6px 9px;color:#243447}
-.toolbar button:hover{background:#e5eff9}
+.toolbar{display:flex;gap:5px;flex-wrap:wrap;padding:7px;background:#f1f3f5;border:1px solid #cbd2d9;border-bottom:0}
+.toolbar button{background:white;border:1px solid #d1d7dd;border-radius:3px;padding:6px 9px;color:#243447}
 .editor{min-height:260px;max-height:390px;overflow:auto;border:1px solid #cbd2d9;padding:14px;line-height:1.65;outline:none}
-.editor:empty:before{content:attr(data-placeholder);color:#999;pointer-events:none}
+.editor:empty:before{content:attr(data-placeholder);color:#999}
 .editor img{max-width:90%;height:auto;display:block;margin:12px auto}
 .modal-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 15px;background:#f8f9fa;border-top:1px solid #ddd}
 .publish{background:#064985;color:white;border:0;padding:9px 16px;border-radius:4px;font-weight:bold}
@@ -80,292 +86,431 @@ nav button{padding:11px 9px;font-size:10px}
 }
 </style>
 </head>
+
 <body>
 <div class="site">
+
 <header class="banner">
-<div>
-<h1>Cổng Thông Tin Kỷ Niệm Cá Nhân</h1>
-<p>Không gian lưu giữ bài viết, hình ảnh và khoảnh khắc đáng nhớ</p>
-</div>
-<div id="today"></div>
+  <div>
+    <h1>Cổng Thông Tin Kỷ Niệm Cá Nhân</h1>
+    <p>Không gian lưu giữ bài viết, hình ảnh và khoảnh khắc đáng nhớ</p>
+  </div>
+  <div id="today"></div>
 </header>
 
 <nav>
-<button class="active" data-page="home"><i class="fa fa-house"></i> TRANG CHỦ</button>
-<button data-page="gallery"><i class="fa fa-images"></i> BỘ SƯU TẬP ẢNH</button>
-<button data-page="about"><i class="fa fa-circle-info"></i> GIỚI THIỆU</button>
-<button class="manage" id="manageBtn"><i class="fa fa-pen-to-square"></i> ĐĂNG BÀI</button>
+  <button class="active" data-page="home"><i class="fa fa-house"></i> TRANG CHỦ</button>
+  <button data-page="gallery"><i class="fa fa-images"></i> BỘ SƯU TẬP ẢNH</button>
+  <button data-page="about"><i class="fa fa-circle-info"></i> GIỚI THIỆU</button>
+  <button class="manage" id="manageBtn"><i class="fa fa-pen-to-square"></i> ĐĂNG BÀI</button>
 </nav>
 
 <main class="layout">
+
 <aside>
-<section class="panel">
-<h3><i class="fa fa-pen-to-square"></i> ĐĂNG KỶ NIỆM</h3>
-<div class="panel-body">
-<button class="primary" id="openEditor"><i class="fa fa-plus-circle"></i> Viết bài / Đăng ảnh</button>
-</div>
-</section>
+  <section class="panel">
+    <h3><i class="fa fa-pen-to-square"></i> ĐĂNG KỶ NIỆM</h3>
+    <div class="panel-body">
+      <button class="primary" id="openEditor"><i class="fa fa-plus-circle"></i> Viết bài / Đăng ảnh</button>
+    </div>
+  </section>
 
-<section class="panel">
-<h3><i class="fa fa-bars"></i> DANH MỤC NHANH</h3>
-<ul class="menu">
-<li><button data-page="home">› Dòng thời gian chung</button></li>
-<li><button data-page="gallery">› Xem tất cả hình ảnh</button></li>
-<li><button data-page="about">› Thông tin website</button></li>
-</ul>
-</section>
+  <section class="panel">
+    <h3><i class="fa fa-bars"></i> DANH MỤC NHANH</h3>
+    <ul class="menu">
+      <li><button data-page="home">› Dòng thời gian chung</button></li>
+      <li><button data-page="gallery">› Xem tất cả hình ảnh</button></li>
+      <li><button data-page="about">› Thông tin website</button></li>
+    </ul>
+  </section>
 
-<section class="panel">
-<h3><i class="fa fa-chart-pie"></i> THỐNG KÊ</h3>
-<div class="panel-body stat">
-<div><i class="fa fa-newspaper"></i> Tổng bài đăng: <strong id="postCount">—</strong></div>
-<div><i class="fa fa-image"></i> Tổng số ảnh: <strong id="imageCount">—</strong></div>
-<div><i class="fa fa-cloud"></i> Trạng thái: <strong id="connection">Đang kiểm tra</strong></div>
-</div>
-</section>
+  <section class="panel">
+    <h3><i class="fa fa-chart-pie"></i> THỐNG KÊ</h3>
+    <div class="panel-body stat">
+      <div><i class="fa fa-newspaper"></i> Tổng bài đăng: <strong id="postCount">—</strong></div>
+      <div><i class="fa fa-image"></i> Tổng số ảnh: <strong id="imageCount">—</strong></div>
+      <div><i class="fa fa-cloud"></i> Trạng thái: <strong id="connection">Đang kiểm tra</strong></div>
+    </div>
+  </section>
 </aside>
 
 <section>
-<div class="page active" id="page-home">
-<section class="panel">
-<h3><i class="fa fa-newspaper"></i> DÒNG THỜI GIAN & KỶ NIỆM MỚI NHẤT</h3>
-<div class="panel-body">
-<div id="feed" class="feed"><div class="empty">Đang tải bài viết...</div></div>
-</div>
-</section>
-</div>
+  <div class="page active" id="page-home">
+    <section class="panel">
+      <h3><i class="fa fa-newspaper"></i> DÒNG THỜI GIAN & KỶ NIỆM MỚI NHẤT</h3>
+      <div class="panel-body">
+        <div id="feed" class="feed"><div class="empty">Đang tải bài viết...</div></div>
+      </div>
+    </section>
+  </div>
 
-<div class="page" id="page-gallery">
-<section class="panel">
-<h3><i class="fa fa-images"></i> BỘ SƯU TẬP HÌNH ẢNH</h3>
-<div class="panel-body">
-<div id="gallery" class="gallery"></div>
-<div id="galleryEmpty" class="empty">Chưa có hình ảnh nào.</div>
-</div>
-</section>
-</div>
+  <div class="page" id="page-gallery">
+    <section class="panel">
+      <h3><i class="fa fa-images"></i> BỘ SƯU TẬP HÌNH ẢNH</h3>
+      <div class="panel-body">
+        <div id="gallery" class="gallery"></div>
+        <div id="galleryEmpty" class="empty">Chưa có hình ảnh nào.</div>
+      </div>
+    </section>
+  </div>
 
-<div class="page" id="page-about">
-<section class="panel">
-<h3><i class="fa fa-circle-info"></i> GIỚI THIỆU</h3>
-<div class="panel-body" style="font-size:14px;line-height:1.8">
-<h2 style="color:#064985">Cổng Thông Tin Kỷ Niệm Cá Nhân</h2>
-<p>Đây là không gian chung để mọi người chia sẻ bài viết, hình ảnh và những khoảnh khắc đáng nhớ. Nội dung được lưu trữ trực tuyến để người truy cập có thể xem trên nhiều thiết bị.</p>
-<p>Hãy cùng xây dựng một kho tư liệu văn minh, tích cực và giàu ý nghĩa.</p>
-</div>
-</section>
-</div>
+  <div class="page" id="page-about">
+    <section class="panel">
+      <h3><i class="fa fa-circle-info"></i> GIỚI THIỆU</h3>
+      <div class="panel-body" style="font-size:14px;line-height:1.8">
+        <h2 style="color:#064985">Cổng Thông Tin Kỷ Niệm Cá Nhân</h2>
+        <p>Đây là không gian chung để mọi người chia sẻ bài viết, hình ảnh và những khoảnh khắc đáng nhớ. Nội dung được lưu trữ trực tuyến để người truy cập có thể xem trên nhiều thiết bị.</p>
+        <p>Hãy cùng xây dựng một kho tư liệu văn minh, tích cực và giàu ý nghĩa.</p>
+      </div>
+    </section>
+  </div>
 </section>
 
 <aside class="right-col">
-<section class="panel">
-<h3><i class="fa fa-palette"></i> TÙY CHỈNH GIAO DIỆN</h3>
-<div class="panel-body setting">
-<label for="themeSelect">Chọn kiểu nền web:</label>
-<select id="themeSelect">
-<option value="default">Mặc định (Xám nhạt)</option>
-<option value="warm">Kem ấm</option>
-<option value="blue">Xanh nhạt</option>
-<option value="dark">Tối</option>
-</select>
-</div>
-</section>
+  <section class="panel">
+    <h3><i class="fa fa-palette"></i> TÙY CHỈNH GIAO DIỆN</h3>
+    <div class="panel-body setting">
+      <label for="themeSelect">Chọn kiểu nền web:</label>
+      <select id="themeSelect">
+        <option value="default">Mặc định (Xám nhạt)</option>
+        <option value="warm">Kem ấm</option>
+        <option value="blue">Xanh nhạt</option>
+        <option value="dark">Tối</option>
+      </select>
+    </div>
+  </section>
 
-<section class="panel">
-<h3><i class="fa fa-circle-question"></i> HƯỚNG DẪN</h3>
-<div class="panel-body" style="font-size:12px;line-height:1.6">
-1. Chọn <b>Viết bài / Đăng ảnh</b>.<br>
-2. Nhập tên, tiêu đề và nội dung.<br>
-3. Chèn ảnh nếu muốn.<br>
-4. Nhấn <b>Đăng bài</b> để chia sẻ.
-</div>
-</section>
+  <section class="panel">
+    <h3><i class="fa fa-circle-question"></i> HƯỚNG DẪN</h3>
+    <div class="panel-body" style="font-size:12px;line-height:1.6">
+      1. Chọn <b>Viết bài / Đăng ảnh</b>.<br>
+      2. Nhập tên, tiêu đề và nội dung.<br>
+      3. Chèn ảnh nếu muốn.<br>
+      4. Nhấn <b>Đăng bài</b> để chia sẻ.
+    </div>
+  </section>
 </aside>
+
 </main>
 </div>
 
-<div class="modal" id="editorModal" role="dialog" aria-modal="true" aria-label="Soạn bài viết">
-<div class="modal-box">
-<div class="modal-head">
-<span><i class="fa fa-file-word"></i> TRÌNH SOẠN THẢO BÀI VIẾT</span>
-<button class="icon-btn" id="closeEditor" aria-label="Đóng">&times;</button>
-</div>
+<div class="modal" id="editorModal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span><i class="fa fa-file-word"></i> TRÌNH SOẠN THẢO BÀI VIẾT</span>
+      <button class="icon-btn" id="closeEditor">&times;</button>
+    </div>
 
-<div class="modal-body">
-<input id="author" class="author-input" maxlength="60" placeholder="Tên người đăng (không bắt buộc)">
-<input id="postTitle" class="title-input" maxlength="180" placeholder="Nhập tiêu đề bài viết...">
+    <div class="modal-body">
+      <input id="author" class="author-input" maxlength="60" placeholder="Tên người đăng (không bắt buộc)">
+      <input id="postTitle" class="title-input" maxlength="180" placeholder="Nhập tiêu đề bài viết...">
 
-<div class="toolbar">
-<button type="button" data-cmd="bold" title="In đậm"><b>B</b></button>
-<button type="button" data-cmd="italic" title="In nghiêng"><i>I</i></button>
-<button type="button" data-cmd="underline" title="Gạch chân"><u>U</u></button>
-<button type="button" data-cmd="justifyLeft" title="Căn trái"><i class="fa fa-align-left"></i></button>
-<button type="button" data-cmd="justifyCenter" title="Căn giữa"><i class="fa fa-align-center"></i></button>
-<button type="button" data-cmd="justifyRight" title="Căn phải"><i class="fa fa-align-right"></i></button>
-<button type="button" data-cmd="insertUnorderedList" title="Danh sách"><i class="fa fa-list-ul"></i></button>
-<button type="button" data-cmd="insertOrderedList" title="Danh sách số"><i class="fa fa-list-ol"></i></button>
-<button type="button" id="addImage"><i class="fa fa-image"></i> Chèn ảnh</button>
-<input id="imageFiles" type="file" accept="image/*" multiple hidden>
-</div>
+      <div class="toolbar">
+        <button type="button" data-cmd="bold"><b>B</b></button>
+        <button type="button" data-cmd="italic"><i>I</i></button>
+        <button type="button" data-cmd="underline"><u>U</u></button>
+        <button type="button" data-cmd="justifyLeft"><i class="fa fa-align-left"></i></button>
+        <button type="button" data-cmd="justifyCenter"><i class="fa fa-align-center"></i></button>
+        <button type="button" data-cmd="justifyRight"><i class="fa fa-align-right"></i></button>
+        <button type="button" data-cmd="insertUnorderedList"><i class="fa fa-list-ul"></i></button>
+        <button type="button" data-cmd="insertOrderedList"><i class="fa fa-list-ol"></i></button>
+        <button type="button" id="addImage"><i class="fa fa-image"></i> Chèn ảnh</button>
+        <input id="imageFiles" type="file" accept="image/*" multiple hidden>
+      </div>
 
-<div id="editor" class="editor" contenteditable="true" data-placeholder="Bắt đầu viết câu chuyện hoặc kỷ niệm của bạn tại đây..."></div>
+      <div id="editor" class="editor" contenteditable="true" data-placeholder="Bắt đầu viết câu chuyện hoặc kỷ niệm của bạn tại đây..."></div>
 
-<div class="notice">Lưu ý: Bài viết và ảnh sẽ được chia sẻ công khai với mọi người có đường link website. Không đăng thông tin cá nhân nhạy cảm.</div>
-</div>
+      <div class="notice">Lưu ý: Bài viết và ảnh sẽ được chia sẻ công khai với mọi người có đường link website. Không đăng thông tin cá nhân nhạy cảm.</div>
+    </div>
 
-<div class="modal-foot">
-<span class="status" id="editorStatus">Bài viết sẽ được lưu trực tuyến.</span>
-<div>
-<button class="secondary" id="cancelEditor">Hủy</button>
-<button class="publish" id="publishBtn"><i class="fa fa-paper-plane"></i> Đăng bài</button>
-</div>
-</div>
-</div>
+    <div class="modal-foot">
+      <span class="status" id="editorStatus">Bài viết sẽ được lưu trực tuyến.</span>
+      <div>
+        <button class="secondary" id="cancelEditor">Hủy</button>
+        <button class="publish" id="publishBtn"><i class="fa fa-paper-plane"></i> Đăng bài</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="lightbox" id="lightbox">
-<button class="icon-btn" id="closeLightbox" style="position:absolute;right:25px;top:15px;color:white">&times;</button>
-<img id="lightboxImage" alt="Ảnh phóng to">
+  <button class="icon-btn" id="closeLightbox" style="position:absolute;right:25px;top:15px;color:white">&times;</button>
+  <img id="lightboxImage" alt="Ảnh phóng to">
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.6/purify.min.js"></script>
 
 <script>
-/* ĐIỀN THÔNG TIN SUPABASE CỦA BẠN VÀO ĐÂY */
-const SUPABASE_URL = "DAN_PROJECT_URL_CUA_BAN";
-const SUPABASE_ANON_KEY = "DAN_ANON_PUBLIC_KEY_CUA_BAN";
+// ===============================
+// CẤU HÌNH SUPABASE
+// ===============================
+
+const SUPABASE_URL = "https://yvqbiynqdwimcqdvcdxv.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_gvIPdXZSGwrpIpl4i2w_Rw_kqW2r9pK";
 const STORAGE_BUCKET = "memory-images";
 
 let supabaseClient = null;
+
 const $ = id => document.getElementById(id);
 const feed = $("feed");
 const gallery = $("gallery");
 
 function setConnection(text,color="#064985"){
-$("connection").textContent=text;
-$("connection").style.color=color;
+  $("connection").textContent = text;
+  $("connection").style.color = color;
 }
 
 function escapeText(value=""){
-return String(value).replace(/[&<>"']/g,c=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-}[c]));
+  return String(value).replace(/[&<>"']/g,c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]));
 }
 
 function safeHtml(html){
-return DOMPurify.sanitize(html,{
-USE_PROFILES:{html:true},
-ADD_TAGS:["img"],
-ADD_ATTR:["src","alt","style"]
-});
+  return DOMPurify.sanitize(html,{
+    USE_PROFILES:{html:true},
+    ADD_TAGS:["img"],
+    ADD_ATTR:["src","alt","style"]
+  });
 }
+
+// ===============================
+// KẾT NỐI SUPABASE
+// ===============================
 
 function initSupabase(){
-if(!window.supabase){
-setConnection("Thiếu thư viện","#b45309");
-return false;
+  if(!window.supabase){
+    setConnection("Thiếu thư viện","#c0392b");
+    return false;
+  }
+
+  try{
+    supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+    return true;
+  }catch(error){
+    console.error(error);
+    setConnection("Lỗi cấu hình","#c0392b");
+    return false;
+  }
 }
 
-if(SUPABASE_URL.startsWith("DAN_") || SUPABASE_ANON_KEY.startsWith("DAN_")){
-setConnection("Chưa cấu hình","#b45309");
-feed.innerHTML='<div class="empty">Website đã tải giao diện. Bạn cần kết nối Supabase trước khi đăng và xem bài trực tuyến.</div>';
-return false;
-}
-
-supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-return true;
-}
+// ===============================
+// TẢI BÀI VIẾT
+// ===============================
 
 async function loadPosts(){
-if(!supabaseClient)return;
+  if(!supabaseClient)return;
 
-feed.innerHTML='<div class="empty">Đang tải bài viết...</div>';
+  feed.innerHTML = '<div class="empty">Đang tải bài viết...</div>';
 
-const {data,error}=await supabaseClient
-.from("posts")
-.select("id,title,author,content,created_at")
-.order("created_at",{ascending:false});
+  const {data,error} = await supabaseClient
+    .from("posts")
+    .select("id,title,author,content,created_at")
+    .order("created_at",{ascending:false});
 
-if(error){
-feed.innerHTML='<div class="empty">Không tải được bài viết. Hãy kiểm tra cấu hình Supabase và SQL.</div>';
-setConnection("Lỗi kết nối","#c0392b");
-console.error(error);
-return;
+  if(error){
+    console.error(error);
+    feed.innerHTML = '<div class="empty">Không tải được bài viết. Vui lòng kiểm tra quyền truy cập Supabase.</div>';
+    setConnection("Lỗi tải dữ liệu","#c0392b");
+    return;
+  }
+
+  setConnection("Đã kết nối","#218838");
+  $("postCount").textContent = data.length;
+
+  let totalImages = 0;
+  gallery.innerHTML = "";
+
+  if(!data.length){
+    feed.innerHTML = '<div class="empty">Chưa có bài đăng nào. Hãy là người đầu tiên chia sẻ kỷ niệm!</div>';
+  }else{
+    feed.innerHTML = "";
+
+    data.forEach(post=>{
+      const article = document.createElement("article");
+      article.className = "post";
+
+      const title = post.title ? `<h2>${escapeText(post.title)}</h2>` : "";
+      const date = new Date(post.created_at).toLocaleString("vi-VN");
+
+      article.innerHTML = `
+        ${title}
+        <div class="post-content">${safeHtml(post.content||"")}</div>
+        <div class="post-meta">
+          <i class="fa fa-user"></i> ${escapeText(post.author||"Người dùng")}
+          &nbsp; · &nbsp;
+          <i class="fa fa-clock"></i> ${escapeText(date)}
+        </div>
+      `;
+
+      feed.appendChild(article);
+
+      article.querySelectorAll(".post-content img").forEach(img=>{
+        totalImages++;
+
+        const thumb = document.createElement("img");
+        thumb.src = img.src;
+        thumb.alt = img.alt || "Ảnh kỷ niệm";
+        thumb.addEventListener("click",()=>showLightbox(img.src));
+
+        gallery.appendChild(thumb);
+
+        img.addEventListener("click",()=>showLightbox(img.src));
+      });
+    });
+  }
+
+  $("imageCount").textContent = totalImages;
+  $("galleryEmpty").style.display = totalImages ? "none" : "block";
 }
 
-setConnection("Đã kết nối","#218838");
-$("postCount").textContent=data.length;
-
-let totalImages=0;
-gallery.innerHTML="";
-
-if(!data.length){
-feed.innerHTML='<div class="empty">Chưa có bài đăng nào. Hãy là người đầu tiên chia sẻ kỷ niệm!</div>';
-}else{
-feed.innerHTML="";
-
-data.forEach(post=>{
-const article=document.createElement("article");
-article.className="post";
-
-const title=post.title?`<h2>${escapeText(post.title)}</h2>`:"";
-const date=new Date(post.created_at).toLocaleString("vi-VN");
-
-article.innerHTML=`
-${title}
-<div class="post-content">${safeHtml(post.content||"")}</div>
-<div class="post-meta">
-<i class="fa fa-user"></i> ${escapeText(post.author||"Người dùng")}
-&nbsp; · &nbsp;
-<i class="fa fa-clock"></i> ${date}
-</div>`;
-
-feed.appendChild(article);
-
-article.querySelectorAll(".post-content img").forEach(img=>{
-totalImages++;
-const thumb=document.createElement("img");
-thumb.src=img.src;
-thumb.alt=img.alt||"Ảnh kỷ niệm";
-thumb.addEventListener("click",()=>showLightbox(img.src));
-gallery.appendChild(thumb);
-});
-});
-}
-
-$("imageCount").textContent=totalImages;
-$("galleryEmpty").style.display=totalImages?"none":"block";
-}
+// ===============================
+// XỬ LÝ ẢNH
+// ===============================
 
 function showLightbox(src){
-$("lightboxImage").src=src;
-$("lightbox").classList.add("open");
+  $("lightboxImage").src = src;
+  $("lightbox").classList.add("open");
 }
 
+$("addImage").addEventListener("click",()=>{
+  $("imageFiles").click();
+});
+
+$("imageFiles").addEventListener("change",async e=>{
+  const files = Array.from(e.target.files || []);
+
+  for(const file of files){
+    if(!file.type.startsWith("image/")){
+      alert("Vui lòng chỉ chọn tệp hình ảnh.");
+      continue;
+    }
+
+    if(file.size > 8*1024*1024){
+      alert("Ảnh "+file.name+" lớn hơn 8 MB. Vui lòng chọn ảnh nhỏ hơn.");
+      continue;
+    }
+
+    const localUrl = URL.createObjectURL(file);
+    const img = document.createElement("img");
+    img.src = localUrl;
+    img.alt = file.name;
+
+    $("editor").focus();
+    $("editor").appendChild(img);
+    $("editor").appendChild(document.createElement("p"));
+  }
+
+  e.target.value = "";
+});
+
+// ===============================
+// ĐĂNG BÀI
+// ===============================
+
+$("publishBtn").addEventListener("click",async()=>{
+  if(!supabaseClient){
+    alert("Website chưa kết nối được Supabase.");
+    return;
+  }
+
+  const title = $("postTitle").value.trim();
+  const author = $("author").value.trim() || "Người dùng";
+  const editor = $("editor");
+
+  if(!title && !editor.innerText.trim() && !editor.querySelector("img")){
+    alert("Vui lòng nhập tiêu đề hoặc nội dung bài viết.");
+    return;
+  }
+
+  const btn = $("publishBtn");
+  btn.disabled = true;
+  $("editorStatus").textContent = "Đang tải ảnh và lưu bài viết...";
+
+  try{
+    for(const img of Array.from(editor.querySelectorAll("img"))){
+      if(img.src.startsWith("blob:")){
+        const response = await fetch(img.src);
+        const blob = await response.blob();
+
+        const ext = (blob.type.split("/")[1] || "jpg").replace("jpeg","jpg");
+        const uniqueId = crypto.randomUUID
+          ? crypto.randomUUID()
+          : Date.now()+"-"+Math.random().toString(36).slice(2);
+
+        const path = `${Date.now()}-${uniqueId}.${ext}`;
+
+        const {error:uploadError} = await supabaseClient
+          .storage
+          .from(STORAGE_BUCKET)
+          .upload(path,blob,{
+            contentType:blob.type,
+            upsert:false
+          });
+
+        if(uploadError)throw uploadError;
+
+        const {data} = supabaseClient
+          .storage
+          .from(STORAGE_BUCKET)
+          .getPublicUrl(path);
+
+        img.src = data.publicUrl;
+      }
+    }
+
+    const content = safeHtml(editor.innerHTML);
+
+    const {error} = await supabaseClient
+      .from("posts")
+      .insert([{title,author,content}]);
+
+    if(error)throw error;
+
+    closeEditor();
+    await loadPosts();
+
+    alert("Đăng bài thành công! Bài viết đã được lưu trực tuyến.");
+
+  }catch(err){
+    console.error(err);
+    $("editorStatus").textContent = "Không thể đăng bài.";
+
+    alert(
+      "Đăng bài chưa thành công: "+
+      (err.message || "Lỗi không xác định")+
+      ". Vui lòng kiểm tra quyền truy cập và cấu hình Storage."
+    );
+  }finally{
+    btn.disabled = false;
+  }
+});
+
+// ===============================
+// ĐÓNG / MỞ TRÌNH SOẠN THẢO
+// ===============================
+
 function openEditor(){
-$("editorModal").classList.add("open");
-$("editor").focus();
+  $("editorModal").classList.add("open");
+  $("editor").focus();
 }
 
 function closeEditor(){
-$("editorModal").classList.remove("open");
-$("editor").innerHTML="";
-$("postTitle").value="";
-$("author").value="";
-$("editorStatus").textContent="Bài viết sẽ được lưu trực tuyến.";
+  $("editorModal").classList.remove("open");
+  $("editor").innerHTML = "";
+  $("postTitle").value = "";
+  $("author").value = "";
+  $("imageFiles").value = "";
+  $("editorStatus").textContent = "Bài viết sẽ được lưu trực tuyến.";
 }
-
-document.querySelectorAll("[data-page]").forEach(btn=>{
-btn.addEventListener("click",()=>{
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-$("page-"+btn.dataset.page).classList.add("active");
-
-document.querySelectorAll("nav button[data-page]").forEach(b=>{
-b.classList.toggle("active",b===btn);
-});
-});
-});
 
 $("openEditor").addEventListener("click",openEditor);
 $("manageBtn").addEventListener("click",openEditor);
@@ -373,144 +518,97 @@ $("closeEditor").addEventListener("click",closeEditor);
 $("cancelEditor").addEventListener("click",closeEditor);
 
 $("editorModal").addEventListener("click",e=>{
-if(e.target===$("editorModal"))closeEditor();
+  if(e.target === $("editorModal"))closeEditor();
 });
+
+// ===============================
+// CÔNG CỤ SOẠN THẢO
+// ===============================
 
 document.querySelectorAll("[data-cmd]").forEach(btn=>{
-btn.addEventListener("mousedown",e=>e.preventDefault());
-btn.addEventListener("click",()=>{
-$("editor").focus();
-document.execCommand(btn.dataset.cmd,false,null);
-});
-});
+  btn.addEventListener("mousedown",e=>e.preventDefault());
 
-$("addImage").addEventListener("click",()=>$("imageFiles").click());
-
-$("imageFiles").addEventListener("change",async e=>{
-const files=Array.from(e.target.files||[]);
-if(!files.length)return;
-
-if(files.some(f=>!f.type.startsWith("image/"))){
-alert("Vui lòng chỉ chọn tệp hình ảnh.");
-e.target.value="";
-return;
-}
-
-for(const file of files){
-if(file.size>8*1024*1024){
-alert("Ảnh "+file.name+" lớn hơn 8 MB. Vui lòng chọn ảnh nhỏ hơn.");
-continue;
-}
-
-const localUrl=URL.createObjectURL(file);
-const img=document.createElement("img");
-img.src=localUrl;
-img.alt=file.name;
-
-$("editor").focus();
-$("editor").appendChild(img);
-$("editor").appendChild(document.createElement("p"));
-}
-
-e.target.value="";
+  btn.addEventListener("click",()=>{
+    $("editor").focus();
+    document.execCommand(btn.dataset.cmd,false,null);
+  });
 });
 
-$("publishBtn").addEventListener("click",async()=>{
-if(!supabaseClient){
-alert("Website chưa được kết nối Supabase. Hãy hoàn tất cấu hình trước.");
-return;
-}
+// ===============================
+// CHUYỂN TRANG
+// ===============================
 
-const title=$("postTitle").value.trim();
-const author=$("author").value.trim()||"Người dùng";
-const editor=$("editor");
+document.querySelectorAll("[data-page]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".page").forEach(p=>{
+      p.classList.remove("active");
+    });
 
-if(!title&&!editor.innerText.trim()&&!editor.querySelector("img")){
-alert("Vui lòng nhập tiêu đề hoặc nội dung bài viết.");
-return;
-}
+    $("page-"+btn.dataset.page).classList.add("active");
 
-const btn=$("publishBtn");
-btn.disabled=true;
-$("editorStatus").textContent="Đang tải ảnh và lưu bài viết...";
-
-try{
-for(const img of Array.from(editor.querySelectorAll("img"))){
-if(img.src.startsWith("blob:")){
-const response=await fetch(img.src);
-const blob=await response.blob();
-
-const ext=(blob.type.split("/")[1]||"jpg").replace("jpeg","jpg");
-const path=`${Date.now()}-${crypto.randomUUID()}.${ext}`;
-
-const {error:uploadError}=await supabaseClient
-.storage.from(STORAGE_BUCKET)
-.upload(path,blob,{
-contentType:blob.type,
-upsert:false
+    document.querySelectorAll("nav button[data-page]").forEach(b=>{
+      b.classList.toggle("active",b===btn);
+    });
+  });
 });
 
-if(uploadError)throw uploadError;
+// ===============================
+// PHÓNG TO ẢNH
+// ===============================
 
-const {data}=supabaseClient
-.storage.from(STORAGE_BUCKET)
-.getPublicUrl(path);
-
-img.src=data.publicUrl;
-}
-}
-
-const content=safeHtml(editor.innerHTML);
-
-const {error}=await supabaseClient
-.from("posts")
-.insert([{title,author,content}]);
-
-if(error)throw error;
-
-closeEditor();
-await loadPosts();
-alert("Đăng bài thành công! Bài viết đã được lưu trực tuyến.");
-
-}catch(err){
-console.error(err);
-$("editorStatus").textContent="Không thể đăng bài.";
-alert("Đăng bài chưa thành công: "+(err.message||"Lỗi không xác định")+". Hãy kiểm tra cấu hình và quyền Supabase.");
-}finally{
-btn.disabled=false;
-}
+$("closeLightbox").addEventListener("click",()=>{
+  $("lightbox").classList.remove("open");
 });
-
-$("closeLightbox").addEventListener("click",()=>$("lightbox").classList.remove("open"));
 
 $("lightbox").addEventListener("click",e=>{
-if(e.target===$("lightbox"))$("lightbox").classList.remove("open");
+  if(e.target === $("lightbox")){
+    $("lightbox").classList.remove("open");
+  }
 });
 
-$("themeSelect").addEventListener("change",e=>{
-const v=e.target.value;
+// ===============================
+// TÙY CHỈNH GIAO DIỆN
+// ===============================
 
-document.body.style.background=
-v==="warm"?"#f5efe5":
-v==="blue"?"#e8f1fa":
-v==="dark"?"#202a35":"#f0f2f5";
+function applyTheme(v){
+  document.body.style.background =
+    v==="warm" ? "#f5efe5" :
+    v==="blue" ? "#e8f1fa" :
+    v==="dark" ? "#202a35" : "#f0f2f5";
 
-document.body.style.color=v==="dark"?"#edf2f7":"#263238";
-localStorage.setItem("memory-theme",v);
-});
-
-const savedTheme=localStorage.getItem("memory-theme");
-if(savedTheme){
-$("themeSelect").value=savedTheme;
-$("themeSelect").dispatchEvent(new Event("change"));
+  document.body.style.color =
+    v==="dark" ? "#edf2f7" : "#263238";
 }
 
-const now=new Date();
-$("today").textContent=now.toLocaleDateString("vi-VN",{
-weekday:"long",day:"2-digit",month:"2-digit",year:"numeric"
+$("themeSelect").addEventListener("change",e=>{
+  const v = e.target.value;
+  applyTheme(v);
+  localStorage.setItem("memory-theme",v);
 });
 
-if(initSupabase())loadPosts();
+const savedTheme = localStorage.getItem("memory-theme");
+if(savedTheme){
+  $("themeSelect").value = savedTheme;
+  applyTheme(savedTheme);
+}
+
+// ===============================
+// NGÀY THÁNG VÀ KHỞI ĐỘNG
+// ===============================
+
+$("today").textContent = new Date().toLocaleDateString("vi-VN",{
+  weekday:"long",
+  day:"2-digit",
+  month:"2-digit",
+  year:"numeric"
+});
+
+if(initSupabase()){
+  loadPosts();
+}else{
+  setConnection("Chưa kết nối","#c0392b");
+  feed.innerHTML = '<div class="empty">Không thể khởi tạo kết nối. Vui lòng tải lại trang hoặc kiểm tra cấu hình.</div>';
+}
 </script>
 </body>
 </html>
